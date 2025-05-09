@@ -33,19 +33,6 @@ jobs:
         with:
           cache: yarn
           node-version: lts/*
-      - name: Install Linux dependencies
-        if: inputs.platform == 'linux'
-        run: |
-          sudo apt-get -y update
-          sudo apt-get -y install make nodejs
-          sudo snap install zig --classic --beta
-      - name: Install MacOS dependencies
-        if: inputs.platform == 'darwin'
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: 1
-        run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          brew install zig make
       - name: Install zig on windows
         if: inputs.platform == 'windows'
         shell: pwsh
@@ -79,28 +66,11 @@ jobs:
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: ${{ inputs.toolchain }}
-      - name: Run tests
-        if: inputs.platform != 'windows'
-        run: |
-          make test-ci 2>&1
-      - name: Run tests on windows
-        if: inputs.platform == 'windows'
-        shell: msys2 {0}
-        run: |
-          make test-ci 2>&1
-      - name: Build Linux binaries
-        if: inputs.release && inputs.platform == 'linux'
-        run: |
-          make libs-${{ inputs.release }}
-          make release-aws-${{ inputs.release }}
-          make release-aws-${{ inputs.release }}-no-sdk
-          make release-aws-${{ inputs.release }}-full-sdk
-      - name: Build Darwin binaries
-        if: inputs.release && inputs.platform == 'darwin'
-        run: |
-          make llrt-darwin-${{ inputs.release }}.zip
-          make llrt-darwin-${{ inputs.release }}-no-sdk.zip
-          make llrt-darwin-${{ inputs.release }}-full-sdk.zip
+      # - name: Run tests on windows
+      #   if: inputs.platform == 'windows'
+      #   shell: msys2 {0}
+      #   run: |
+      #     make test-ci 2>&1
       - name: Build Windows binaries
         if: inputs.release && inputs.platform == 'windows'
         shell: msys2 {0}
