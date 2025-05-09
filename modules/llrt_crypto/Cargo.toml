@@ -1,7 +1,7 @@
 [package]
 name = "llrt_crypto"
 description = "LLRT Module crypto"
-version = "0.5.1-beta"
+version = "0.5.2-beta"
 edition = "2021"
 license = "Apache-2.0"
 repository = "https://github.com/awslabs/llrt"
@@ -37,11 +37,11 @@ subtle-rs = [
 [dependencies]
 crc32c = "0.6"
 crc32fast = "1"
-llrt_buffer = { version = "0.5.1-beta", path = "../llrt_buffer" }
-llrt_context = { version = "0.5.1-beta", path = "../../libs/llrt_context" }
-llrt_encoding = { version = "0.5.1-beta", path = "../../libs/llrt_encoding" }
-llrt_utils = { version = "0.5.1-beta", path = "../../libs/llrt_utils", default-features = false }
-llrt_json = { version = "0.5.1-beta", path = "../../libs/llrt_json", optional = true }
+llrt_buffer = { version = "0.5.2-beta", path = "../llrt_buffer" }
+llrt_context = { version = "0.5.2-beta", path = "../../libs/llrt_context" }
+llrt_encoding = { version = "0.5.2-beta", path = "../../libs/llrt_encoding" }
+llrt_utils = { version = "0.5.2-beta", path = "../../libs/llrt_utils", default-features = false }
+llrt_json = { version = "0.5.2-beta", path = "../../libs/llrt_json", optional = true }
 once_cell = "1"
 rand = "0.8"
 ring = { version = "0.17", features = ["std"] }
